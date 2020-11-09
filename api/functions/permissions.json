@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "gabrovo-humour",
+  "private_key_id": "c05156b0481e7e5afc50c25fa94ea8c71b9d8614",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQC0JOWYnlixkpSk\nPsV3nNQ7ONUgz0ZP74nbpcZyvhCZlKy1rx5U7mBd9bLCRd8qhi4ZTAYGKEbeVWdH\n3uVPrjJjqPqaNtuQOJ/LEzTbj55qTq6q9ApxvPMwkiNbNlj5JGtTWrG30+LiQmBV\naP0VBbnx2g7aWxBsU96gQRT4fglLIjdIySq5oYaDxRNnytAw/eEQ5sin06+p9eVQ\nu3MIwyJ/7yLp/87zXF4r1qZT0ATTdZCkoIvPA2B0UUEaUSyceJW05vJNF19liGOw\nA/Ra+mTa1iWPwXYNfH9TZ9ioJVTnuIbcbMpUZ38zCQXvvZpX9Vav40SqOlD35Ogj\n3pHECJCrAgMBAAECggEAGGe3QzSQnN4C4o2D1cSawWXdrz2QL7GADRB/EM8hvezK\nc9gZqoqbkPSBwe1oDSwd1VzbTrzo0k43rnZKvWoYIYWkYygeGYJ9A4IX8yGYkJvA\nRiDHGXRDw3IeSskox01hIkBzOzhVey8K5gdR4iXjHxovpkgYCCpZ9X6xB0lBRmWj\nYwP6vlIQlpBKeWRBGzgh9e8gXBBcAVJuzJelxslgKh4M2bGILd7vy+rqjvCzR4HP\ns68tQcdm2I57e9X2hCN9dOozvIcizIbm7+h2J16paj94eTq1KjfhaqMzIl9N8RyX\nJTHFfFpFysKE0Kkt1X7EhnF5luM3K3j8wEO5UKgfIQKBgQDf1g5nNMQkL+d+UxJN\nZlU4/MFMTOOr/0LTwsszMHTao3VUIINzNIiEQ8Q6WO2kmb3BXZSjL9s0kniYMnFa\nRZUW4gnapTj7Dq5wmkjiJih/uqP9gj06oZ4PGqC88rsZF7C/AtAjj+YV0ePrnjOa\n5HD27EgT6wWi94VcVdB7RTBRdwKBgQDOB5qS2/TATjoz9fauGFGfj7aVwHKvKAjB\n2WkqPvntCD0Ezv3Sq6tcHJXeOJvOIaiver90Vr9avzVPJgkK++kGGOFhHuysle1+\nohufOXyQj4sTirbo0QYfkfNYSjNdXMdNZGhUFvmuIFuDfLFeo44Upcrv62S2zffk\n4erAI4lnbQKBgQCdF5L2Nd8ucnxqeQzQS3CmVSWoUhI7RSP2kLCh1XE9fRi8GTGI\nKidhhFn0hTMLoWa+jdniiZSzmdSPJF/PdiRDchJuZCTQdiZRGsbqCNPFiQzMv5oP\nSxwuB4cl9MkAvFKsS+IeA0D8sVjfpSEcpRTvBzcy23ASRttOyV9PFGjr0wKBgQC7\n3LcXXjTn/OyZYJfT2xziL3q/RcHM8OY7S/DWsqHVfoOVFODg7ePMk8wb2uZGqO5V\nQ8m7XTYSmvMS/o2UVGsAQkOP+VC5deQeadZh81sfvaOE6CEsXRwGQWDwiogXg3e/\nm+R9eI2mNp77YAGjV+M/9IT9C1jETz7Qlyckl8K8aQKBgQCIeUB9B/1JOu6GeuZR\nKVOqyVa/AijlJ5d4EK/58n/rCdhL+919CjcTeUZovE4y34iv17vrODnh6o6WxY8d\n1saUDcjwjv+AUv+uHbO2nxA2hTnaGPpZXdMh1r12oQ1qAjaajGdWF1EArqsUqvJW\nsBpPP+2YeSUYlZdTQ2DOM8gxyA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-f6oer@gabrovo-humour.iam.gserviceaccount.com",
+  "client_id": "108167989329776296632",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-f6oer%40gabrovo-humour.iam.gserviceaccount.com"
+}
