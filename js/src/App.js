@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+// React import can be skipped in the future react versions.
+import React, { useEffect, useState } from 'react';
+import Container from '@material-ui/core/Container';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Typography from '@material-ui/core/Typography';
+
+import * as api from './data/api';
 
 function App() {
+  const [jokes, setJokes] = useState([]);
+
+  useEffect(() => {
+    api.getJokes().then((response) => setJokes(response));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <List>
+        {jokes.map(({ title, content }, index) => (
+          <ListItem key={index}>
+            <ListItemText
+              primary={title}
+              secondary={content.map((line, index) => (
+                <Typography
+                  key={index}
+                  variant="body2"
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  {line}
+                </Typography>
+              ))}
+              secondaryTypographyProps={{ component: 'div' }}
+              // secondaryTypographyProps={{ noWrap: true }}
+            />
+          </ListItem>
+        ))}
+      </List>
+    </Container>
   );
 }
 
