@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "4904cce5-96a5-4639-8b4e-e5ad55c187c3",
+		"name": "firebase-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost",
+			"item": [
+				{
+					"name": "create joke",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "16573e61-13ca-4dca-a7de-6dc6d580a598",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Заглавие на шега\",\n  \"content\": [\n    \"Едно\",\n    \"Две\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/gabrovo-humour/us-central1/app/api/jokes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"gabrovo-humour",
+								"us-central1",
+								"app",
+								"api",
+								"jokes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "read jokes (pagination, ordered by created, 30 items per page)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d9baf27f-c130-4a6c-9746-0e71d8e388de",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/gabrovo-humour/us-central1/app/api/jokes?itemsPerPage=30&orderBy=created&orderByDirection=desc&currentPage=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"gabrovo-humour",
+								"us-central1",
+								"app",
+								"api",
+								"jokes"
+							],
+							"query": [
+								{
+									"key": "itemsPerPage",
+									"value": "30"
+								},
+								{
+									"key": "orderBy",
+									"value": "created"
+								},
+								{
+									"key": "orderByDirection",
+									"value": "desc"
+								},
+								{
+									"key": "currentPage",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "random joke",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "db213e6e-b164-46f9-958f-364b5c48a8ef",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/gabrovo-humour/us-central1/app/api/jokes?itemsPerPage=1&orderBy=random",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"gabrovo-humour",
+								"us-central1",
+								"app",
+								"api",
+								"jokes"
+							],
+							"query": [
+								{
+									"key": "itemsPerPage",
+									"value": "1"
+								},
+								{
+									"key": "orderBy",
+									"value": "random"
+								},
+								{
+									"key": "orderByDirection",
+									"value": "desc",
+									"disabled": true
+								},
+								{
+									"key": "currentPage",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "three latest jokes",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "60512d71-e1c6-4fab-8fcb-5e891ca5840c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/gabrovo-humour/us-central1/app/api/jokes?itemsPerPage=3&orderBy=created&orderByDirection=desc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"gabrovo-humour",
+								"us-central1",
+								"app",
+								"api",
+								"jokes"
+							],
+							"query": [
+								{
+									"key": "itemsPerPage",
+									"value": "3"
+								},
+								{
+									"key": "orderBy",
+									"value": "created"
+								},
+								{
+									"key": "orderByDirection",
+									"value": "desc"
+								},
+								{
+									"key": "currentPage",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

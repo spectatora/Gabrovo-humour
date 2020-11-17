@@ -38,7 +38,7 @@ app.post('/api/jokes', [
                 let currentCount = snapshot.size + 1;
                 let data = req.body;
                 data.created = Date.now();
-                db.collection('jokes').doc('/' + 'ninja' + currentCount + '/')
+                return db.collection('jokes').doc('/' + currentCount + '/')
                     .create(req.body);
             });
             return res.status(200).send();
@@ -56,7 +56,7 @@ app.get('/api/jokes', [
     check('itemsPerPage').trim().isNumeric().isInt({min:1, max:30}),
     check('orderBy').trim().isIn(['created', 'random']),
     check('orderByDirection').optional().isIn(['asc', 'desc']).custom((val, {req}) => {
-        if (val && req.query.orderBy == 'random') {
+        if (val && req.query.orderBy === 'random') {
             throw new Error("OrderByDirection is not supported on random order");
         }
         return true;
@@ -82,11 +82,12 @@ app.get('/api/jokes', [
                 response.totalItems = snapshot.size;
                 response.totalPages = Math.round(response.totalItems / itemsPerPage);
                 response.currentPage = currentPage;
+                return response;
             });
 
             if (currentPage !== 1) {
                 let currentItem = (currentPage - 1) * itemsPerPage + 1;
-                if (orderBy == "created" && orderByDirection == "desc") {
+                if (orderBy === "created" && orderByDirection === "desc") {
                     currentItem = totalItems - currentItem + 1;
                 }
                 const docRef = db.collection('jokes').doc('/' + currentItem);
@@ -114,6 +115,7 @@ app.get('/api/jokes', [
                     };
                     response.items.push(selectedItem);
                 }
+                return response;
             });
             return res.status(200).send(response);
         } catch (error) {
