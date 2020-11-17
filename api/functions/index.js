@@ -3,6 +3,7 @@ const admin = require('firebase-admin');
 const express = require('express');
 const cors = require('cors');
 var serviceAccount = require("./permissions.json");
+const { check, body, validationResult } = require('express-validator');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -15,14 +16,29 @@ app.use(cors({ origin: true }));
 app.use(express.json()) // for parsing application/json
 
 // create joke
-app.post('/api/jokes', (req, res) => {
+app.post('/api/jokes', [
+    body('title').isLength({ min: 5 }),
+    body('content').custom((val, {req}) => {
+        if (!Array.isArray(val)) {
+            throw new Error('Content should consist of array of the jokes');
+        }
+        if (val.length < 1) {
+            throw new Error("Content should should not be empty");
+        }
+        return true;
+    })
+], (req, res) => {
     (async () => {
         try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ errors: errors.array() });
+            }
             await db.collection('jokes').get().then(snapshot => {
                 let currentCount = snapshot.size + 1;
                 let data = req.body;
                 data.created = Date.now();
-                db.collection('jokes').doc('/' + 'ninja' + '/')
+                db.collection('jokes').doc('/' + 'ninja' + currentCount + '/')
                     .create(req.body);
             });
             return res.status(200).send();
@@ -35,14 +51,29 @@ app.post('/api/jokes', (req, res) => {
 });
 
 
-// read all
-app.get('/api/jokes', (req, res) => {
+// read joeks
+app.get('/api/jokes', [
+    check('itemsPerPage').trim().isNumeric().isInt({min:1, max:30}),
+    check('orderBy').trim().isIn(['created', 'random']),
+    check('orderByDirection').optional().isIn(['asc', 'desc']).custom((val, {req}) => {
+        if (val && req.query.orderBy == 'random') {
+            throw new Error("OrderByDirection is not supported on random order");
+        }
+        return true;
+    }),
+    check('currentPage').optional().isInt()
+], (req, res) => {
     (async () => {
         try {
-            let itemsPerPage = 9;
-            let currentPage = 1;
-            let orderBy = "created";
-            let orderByDirection = "asc";
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ errors: errors.array() });
+            }
+
+            let itemsPerPage = parseInt(req.query.itemsPerPage) || 10;
+            let currentPage = req.query.currentPage || 1;
+            let orderBy = req.query.orderBy || "created";
+            let orderByDirection = req.query.orderByDirection || "asc";
             let response = {};
             let totalItems = 0;
             let query;
@@ -55,6 +86,9 @@ app.get('/api/jokes', (req, res) => {
 
             if (currentPage !== 1) {
                 let currentItem = (currentPage - 1) * itemsPerPage + 1;
+                if (orderBy == "created" && orderByDirection == "desc") {
+                    currentItem = totalItems - currentItem + 1;
+                }
                 const docRef = db.collection('jokes').doc('/' + currentItem);
                 const snapshot = await docRef.get();
                 query = db.collection('jokes').orderBy(orderBy, orderByDirection).startAt(snapshot).limit(itemsPerPage);
@@ -63,7 +97,7 @@ app.get('/api/jokes', (req, res) => {
                 let currentItem = Math.round(Math.random() * (totalItems - itemsPerPage));
                 const docRef = db.collection('jokes').doc('/' + currentItem);
                 const snapshot = await docRef.get();
-                query = db.collection('jokes').orderByKey().startAt(snapshot).limit(itemsPerPage);
+                query = db.collection('jokes').startAt(snapshot).limit(itemsPerPage);
             } else {
                 query = db.collection('jokes').orderBy(orderBy, orderByDirection).limit(itemsPerPage);
             }
@@ -74,7 +108,9 @@ app.get('/api/jokes', (req, res) => {
                 for (let doc of docs) {
                     const selectedItem = {
                         id: doc.id,
-                        item: doc.data().item
+                        content: doc.data().content,
+                        created: doc.data().created,
+                        title: doc.data().title,
                     };
                     response.items.push(selectedItem);
                 }
