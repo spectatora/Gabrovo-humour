@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './index.css';
 
 // FIXME: <React.StrictMode> - removed because cause double rendering in development environment
 ReactDOM.render(<App />, document.getElementById('root'));

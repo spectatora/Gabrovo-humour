@@ -11,12 +11,12 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Button from '@material-ui/core/Button';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// Should always be last
+// Should always be last from material imports
 import Box from '@material-ui/core/Box';
 // Application imports
-import * as api from '../data/api';
+import * as api from '../../../data/api';
 
-function JokesPage({ page, isLast, setPages }) {
+function Page({ page, isLast, setPages }) {
   const [jokes, setJokes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -71,8 +71,6 @@ function JokesPage({ page, isLast, setPages }) {
     );
   }
 
-  // console.debug('render jokes page', page, loading, error ? error : jokes);
-
   return (
     <>
       <List disablePadding>
@@ -111,4 +109,4 @@ function JokesPage({ page, isLast, setPages }) {
 }
 
 // export default JokesPage;
-export default React.memo(JokesPage);
+export default React.memo(Page);
