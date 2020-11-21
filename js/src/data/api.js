@@ -7,8 +7,6 @@ const ERROR_RATE = 0.1; // 10%
 
 // mock API communication
 async function apiFetch(success) {
-  // console.debug('fetch data.');
-
   // error rate
   if (Math.random() <= ERROR_RATE) {
     throw new Error('API error occur.');
@@ -22,13 +20,24 @@ async function apiFetch(success) {
 
 // TODO: fetch jokes through API
 const PER_PAGE = 10;
-export function getJokes(page) {
+export function getJokes(page, limit = PER_PAGE) {
   return apiFetch(() =>
-    jokes
-      .slice((page - 1) * PER_PAGE, page * PER_PAGE)
-      .map(({ title, joke }) => ({
-        title,
-        content: joke.split('\n'),
-      })),
+    jokes.slice((page - 1) * limit, page * limit).map(({ title, joke }) => ({
+      title,
+      content: joke.split('\n'),
+    })),
   );
+}
+
+export function getJokeCount() {
+  return apiFetch(() => jokes.length);
+}
+
+// TODO: fetch jokes through API
+export function getRandomJoke() {
+  return apiFetch(() => {
+    const { title, joke } = jokes[Math.floor(Math.random() * jokes.length)];
+
+    return { title, content: joke.split('\n') };
+  });
 }

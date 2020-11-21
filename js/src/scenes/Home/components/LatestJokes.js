@@ -1,69 +1,74 @@
 // React import can be skipped in the future react versions.
 import React, { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 // Material UI imports
 import Button from '@material-ui/core/Button';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ListIcon from '@material-ui/icons/List';
 // Should always be last from material imports
 import Box from '@material-ui/core/Box';
 // Application imports
 import * as api from '../../../data/api';
+import HomeCard from './HomeCard';
 import JokesList from '../../../components/Jokes/List';
 import Loading from '../../../components/RequestState/Loading';
 import Error from '../../../components/RequestState/Error';
 
-function Page({ page, isLast, setPages }) {
+export default function LatestJokes({ limit }) {
   const [jokes, setJokes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const loadJokes = useCallback(() => {
     api
-      .getJokes(page)
+      .getJokes(1, limit)
       .then((response) => setJokes(response))
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
-  }, [page]);
+  }, [limit]);
 
   useEffect(() => {
     loadJokes();
   }, [loadJokes]);
 
-  // render loading state
-  if (loading) {
-    return <Loading />;
-  }
+  const CardContent = () => {
+    // render loading state
+    if (loading) {
+      return <Loading />;
+    }
 
-  // render error state
-  if (error) {
-    return (
-      <Error
-        onRetry={() => {
-          setError(null);
-          setLoading(true);
-          loadJokes();
-        }}
-      />
-    );
-  }
+    // render error state
+    if (error) {
+      return (
+        <Error
+          onRetry={() => {
+            setError(null);
+            setLoading(true);
+            loadJokes();
+          }}
+        />
+      );
+    }
+
+    return <JokesList jokes={jokes} dividers />;
+  };
 
   return (
-    <>
-      <JokesList jokes={jokes} dividers />
-      {isLast && (
-        <Box display="flex" justifyContent="center" pt={2}>
+    <HomeCard
+      title="Latest jokes"
+      content={<CardContent />}
+      actions={
+        <Box flexGrow={1} display="flex" justifyContent="center">
           <Button
             variant="outlined"
             color="primary"
-            startIcon={<ExpandMoreIcon />}
-            onClick={() => setPages(page + 1)}
+            startIcon={<ListIcon />}
+            component={Link}
+            to="/jokes"
           >
-            Load more
+            Browse all
           </Button>
         </Box>
-      )}
-    </>
+      }
+    />
   );
 }
-
-// export default JokesPage;
-export default React.memo(Page);
