@@ -1,43 +1,32 @@
-import jokes from './jokes.json';
+// TODO: env variable
+const BASE_URL = 'http://localhost:5001/gabrovo-humour/us-central1/app/api';
+const PER_PAGE = 10;
 
-const RESPONSE_DELAY = 2000; // 2 sec
-const ERROR_RATE = 0.1; // 10%
-// const ERROR_RATE = 0.3; // 30%
-// const ERROR_RATE = 1; // 100%
+async function apiFetch(url) {
+  const response = await fetch(BASE_URL + url);
 
-// mock API communication
-async function apiFetch(success) {
-  // error rate
-  if (Math.random() <= ERROR_RATE) {
+  if (!response.ok) {
+    // TODO: handle error message and code
     throw new Error('API error occur.');
   }
 
-  // response delay
-  return new Promise((resolve) =>
-    setTimeout(() => resolve(success()), RESPONSE_DELAY),
-  );
+  return response.json();
 }
 
-// TODO: fetch jokes through API
-const PER_PAGE = 10;
 export function getJokes(page, limit = PER_PAGE) {
-  return apiFetch(() =>
-    jokes.slice((page - 1) * limit, page * limit).map(({ title, joke }) => ({
-      title,
-      content: joke.split('\n'),
-    })),
-  );
+  return apiFetch(
+    `/jokes?currentPage=${page}&itemsPerPage=${PER_PAGE}&orderBy=created&orderByDirection=desc`,
+  ).then((response) => response.items.slice(0, limit));
 }
 
 export function getJokeCount() {
-  return apiFetch(() => jokes.length);
+  return apiFetch(
+    `/jokes?currentPage=1&itemsPerPage=${PER_PAGE}&orderBy=created&orderByDirection=desc`,
+  ).then((response) => response.totalItems);
 }
 
-// TODO: fetch jokes through API
 export function getRandomJoke() {
-  return apiFetch(() => {
-    const { title, joke } = jokes[Math.floor(Math.random() * jokes.length)];
-
-    return { title, content: joke.split('\n') };
-  });
+  return apiFetch(`/jokes?itemsPerPage=1&orderBy=random`).then((response) =>
+    response.items.pop(),
+  );
 }
