@@ -1,5 +1,5 @@
 // React import can be skipped in the future react versions.
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 // Material UI imports
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,7 +14,7 @@ import Chip from '@material-ui/core/Chip';
 // Should always be last from material imports
 import Box from '@material-ui/core/Box';
 // Application imports
-import * as api from '../data/api';
+import { useJokes } from '../data/api';
 
 const useStyles = makeStyles((theme) => ({
   homeLink: { marginRight: theme.spacing(2) },
@@ -29,11 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Layout({ children }) {
   const classes = useStyles();
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    api.getJokeCount().then((res) => setCount(res));
-  }, []);
+  const { total } = useJokes();
 
   return (
     <Box display="flex" flexDirection="column" minHeight="100vh">
@@ -51,7 +47,7 @@ export default function Layout({ children }) {
           <Typography variant="h6" className={classes.title}>
             MAD - Gabrovo
           </Typography>
-          {Boolean(count) && <Chip label={`Count: ${count}`} />}
+          {Boolean(total) && <Chip label={`общо ${total} шеги`} />}
         </Toolbar>
       </AppBar>
       <Toolbar />

@@ -15,7 +15,7 @@ export default function Error({ onRetry }) {
       </Grid>
       <Grid item>
         <Typography variant="h5" align="center">
-          Ops, something went wrong.
+          Упс, възникна грешка.
         </Typography>
       </Grid>
       <Grid item>
@@ -24,7 +24,7 @@ export default function Error({ onRetry }) {
           startIcon={<RefreshIcon />}
           onClick={onRetry}
         >
-          Retry
+          Опитайте отново
         </Button>
       </Grid>
     </Grid>

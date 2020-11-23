@@ -1,65 +1,33 @@
 // React import can be skipped in the future react versions.
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 // Material UI imports
 import IconButton from '@material-ui/core/IconButton';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 // Application imports
-import * as api from '../../../data/api';
 import HomeCard from './HomeCard';
+import { useJokes } from '../../../data/api';
 import JokesList from '../../../components/Jokes/List';
-import Loading from '../../../components/RequestState/Loading';
-import Error from '../../../components/RequestState/Error';
+import RequestStates from '../../../components/RequestState';
 
 export default function RandomJoke() {
-  const [joke, setJoke] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const loadJoke = useCallback(() => {
-    api
-      .getRandomJoke()
-      .then((response) => setJoke(response))
-      .catch((error) => setError(error))
-      .finally(() => setLoading(false));
-  }, []);
-
-  useEffect(() => {
-    loadJoke();
-  }, [loadJoke]);
-
-  const CardContent = () => {
-    // render loading state
-    if (loading) {
-      return <Loading />;
-    }
-
-    // render error state
-    if (error) {
-      return (
-        <Error
-          onRetry={() => {
-            setError(null);
-            setLoading(true);
-            loadJoke();
-          }}
-        />
-      );
-    }
-
-    return <JokesList jokes={[joke]} />;
-  };
+  const { loading, jokes, error, mutate } = useJokes(1, 1, 'random');
 
   return (
     <HomeCard
-      title="Random joke"
-      content={<CardContent />}
+      title="Случайна шега"
+      content={
+        <RequestStates
+          loading={loading}
+          error={error}
+          onRetry={() => mutate(null)}
+        >
+          <JokesList jokes={jokes} />
+        </RequestStates>
+      }
       headAction={
         <IconButton
           disabled={Boolean(error) || loading}
-          onClick={() => {
-            setLoading(true);
-            loadJoke();
-          }}
+          onClick={() => mutate(null)}
         >
           <NavigateNextIcon />
         </IconButton>

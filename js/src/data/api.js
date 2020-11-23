@@ -1,3 +1,6 @@
+import useSWR from 'swr';
+// import apiFetchMock from './api-mock';
+
 // TODO: env variable
 const BASE_URL = 'http://localhost:5001/gabrovo-humour/us-central1/app/api';
 const PER_PAGE = 10;
@@ -13,20 +16,35 @@ async function apiFetch(url) {
   return response.json();
 }
 
-export function getJokes(page, limit = PER_PAGE) {
-  return apiFetch(
-    `/jokes?currentPage=${page}&itemsPerPage=${PER_PAGE}&orderBy=created&orderByDirection=desc`,
-  ).then((response) => response.items.slice(0, limit));
-}
+export function useJokes(
+  page = 1,
+  limit = PER_PAGE,
+  order = 'created',
+  orderDirection = 'asc',
+) {
+  // construct query parameters
+  const parameters = {
+    itemsPerPage: limit.toString(),
+    orderBy: order,
+  };
+  if (order !== 'random') {
+    parameters.currentPage = page.toString();
+    parameters.orderByDirection = orderDirection;
+  }
 
-export function getJokeCount() {
-  return apiFetch(
-    `/jokes?currentPage=1&itemsPerPage=${PER_PAGE}&orderBy=created&orderByDirection=desc`,
-  ).then((response) => response.totalItems);
-}
+  // construct the url
+  const url = '/jokes?' + new URLSearchParams(parameters).toString();
 
-export function getRandomJoke() {
-  return apiFetch(`/jokes?itemsPerPage=1&orderBy=random`).then((response) =>
-    response.items.pop(),
-  );
+  const { data, error, ...state } = useSWR(url, apiFetch, {
+    revalidateOnFocus: false,
+    shouldRetryOnError: false,
+  });
+
+  return {
+    loading: !error && !data,
+    jokes: data ? data.items : [],
+    total: data ? data.totalItems : 0,
+    error,
+    ...state,
+  };
 }

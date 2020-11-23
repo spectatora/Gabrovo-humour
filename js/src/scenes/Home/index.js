@@ -19,7 +19,7 @@ export default function Home() {
           <img src={cat_image} alt="cat" width={150} />
         </Box>
         <Typography variant="h3" align="center">
-          Welcome
+          Добре дошли
         </Typography>
         <Typography
           variant="h6"
@@ -27,15 +27,14 @@ export default function Home() {
           color="textSecondary"
           gutterBottom
         >
-          <i>to the world of humor</i>
+          <i>в света на хумора.</i>
         </Typography>
         <Typography align="justify">
-          Here you can browse tons of funny native jokes about Gabrovo and its
-          folks. Get a quick impression by checking a random joke or check the
-          full list.{' '}
+          Тук ще намерите много забвни Габровски шеги. Пробвайте случайна шега
+          или продължете към пълния списък.
         </Typography>
       </Grid>
-      <Grid item xs={12} md={6} style={{ alignSelf: "stretch" }}>
+      <Grid item xs={12} md={6} style={{ alignSelf: 'stretch' }}>
         <RandomJoke />
       </Grid>
       <Grid item xs>
