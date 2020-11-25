@@ -5,26 +5,41 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import HomeIcon from '@material-ui/icons/Home';
+import Button from "@material-ui/core/Button";
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Chip from '@material-ui/core/Chip';
+import Typography from '@material-ui/core/Typography';
 // Should always be last from material imports
 import Box from '@material-ui/core/Box';
 // Application imports
 import { useJokes } from '../data/api';
 
 const useStyles = makeStyles((theme) => ({
-  homeLink: { marginRight: theme.spacing(2) },
+  main: {
+    background: theme.palette.primary.main,
+  },
+  header: {
+    boxShadow: 'none',
+  },
+  homeLink: {
+    marginRight: theme.spacing(2),
+    color: 'white',
+    textTransform: 'none',
+    fontWeight: '700',
+    textDecoration: 'underline',
+  },
   title: { flexGrow: 1 },
   container: {
+    maxWidth: '1560px',
     flexGrow: 1,
     display: 'flex',
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
   },
+  navWrapper: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  }
 }));
 
 export default function Layout({ children }) {
@@ -32,22 +47,20 @@ export default function Layout({ children }) {
   const { total } = useJokes();
 
   return (
-    <Box display="flex" flexDirection="column" minHeight="100vh">
-      <AppBar position="fixed">
-        <Toolbar>
-          <IconButton
+    <Box className={classes.main} display="flex" flexDirection="column" minHeight="100vh">
+      <AppBar className={classes.header} position="fixed">
+        <Toolbar className={classes.navWrapper}>
+          <Button
             edge="start"
             aria-label="Home"
             component={Link}
             to="/"
             className={classes.homeLink}
           >
-            <HomeIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            MAD - Gabrovo
-          </Typography>
-          {Boolean(total) && <Chip label={`общо ${total} шеги`} />}
+            Начало
+          </Button>
+
+          {Boolean(total) && <Typography variant="caption">общо {total} шеги</Typography>}
         </Toolbar>
       </AppBar>
       <Toolbar />

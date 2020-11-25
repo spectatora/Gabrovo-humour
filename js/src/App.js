@@ -6,6 +6,9 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+
+import theme from './theme';
+import {ThemeProvider} from '@material-ui/styles';
 // Application imports
 import Layout from './components/Layout';
 import Home from './scenes/Home';
@@ -13,20 +16,22 @@ import Jokes from './scenes/Jokes';
 
 export default function App() {
   return (
-    <Router>
-      <Layout>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/jokes">
-            <Jokes />
-          </Route>
-          <Route>
-            <Redirect to="/" />
-          </Route>
-        </Switch>
-      </Layout>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Layout>
+          <Switch>
+            <Route exact path="/">
+              <Home/>
+            </Route>
+            <Route path="/jokes">
+              <Jokes/>
+            </Route>
+            <Route>
+              <Redirect to="/"/>
+            </Route>
+          </Switch>
+        </Layout>
+      </Router>
+    </ThemeProvider>
   );
 }
