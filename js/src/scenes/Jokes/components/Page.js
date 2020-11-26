@@ -9,6 +9,8 @@ import Box from '@material-ui/core/Box';
 import { useJokes } from '../../../data/api';
 import JokesList from '../../../components/Jokes/List';
 import RequestStates from '../../../components/RequestState';
+import {Link} from "react-router-dom";
+import PinkButton from "../../Home/components/PinkButton";
 
 function Page({ page, isLast, setPages }) {
   const { loading, jokes, error, mutate } = useJokes(page);
@@ -18,14 +20,10 @@ function Page({ page, isLast, setPages }) {
       <JokesList jokes={jokes} dividers />
       {isLast && (
         <Box display="flex" justifyContent="center" pt={2}>
-          <Button
-            variant="outlined"
-            color="primary"
-            startIcon={<ExpandMoreIcon />}
+          <PinkButton
+            text={'Зареди още'}
             onClick={() => setPages(page + 1)}
-          >
-            Зареди още
-          </Button>
+          />
         </Box>
       )}
     </RequestStates>

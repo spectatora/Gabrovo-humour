@@ -12,9 +12,18 @@ const useStyles = makeStyles({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    backgroundColor:'transparent',
+    boxShadow:'none',
+    '& .MuiCardHeader-root':{
+      paddingLeft:'0',
+      '& span':{
+        textAlign:'left',
+        fontSize:'25px'
+      }
+    }
   },
   content: {
-    paddingTop: 0,
+    padding: 0,
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
@@ -26,10 +35,9 @@ export default function HomeCard({ title, headAction, content, contentProps, act
   const classes = useStyles();
 
   return (
-    <Card elevation={3} className={classes.card}>
+    <Card className={classes.card}>
       <CardHeader
         title={title}
-        titleTypographyProps={{ color: 'primary' }}
         action={headAction}
       />
       <CardContent className={classes.content} {...contentProps}>

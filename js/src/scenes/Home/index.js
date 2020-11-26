@@ -48,7 +48,7 @@ function Home(props) {
             Добре дошли в света на хумора.
           </Typography>
           <Typography variant="body1" align="justify">
-            Тук ще намерите много забвни Габровски шеги. Пробвайте случайна шега
+            Тук ще намерите много забавни Габровски шеги. Пробвайте случайна шега
             или продължете към пълния списък.
           </Typography>
         </Grid>
@@ -57,7 +57,7 @@ function Home(props) {
         </Grid>
         <Grid item xs>
           <Box minHeight={300}>
-            <LatestJokes limit={3}/>
+            <LatestJokes limit={4}/>
           </Box>
         </Grid>
       </Grid>

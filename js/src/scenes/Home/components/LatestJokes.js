@@ -11,13 +11,14 @@ import { useJokes } from '../../../data/api';
 import HomeCard from './HomeCard';
 import JokesList from '../../../components/Jokes/List';
 import RequestStates from '../../../components/RequestState';
+import PinkButton from "./PinkButton";
 
 export default function LatestJokes({ limit }) {
   const { loading, jokes, error, mutate } = useJokes();
 
   return (
     <HomeCard
-      title="Послени шеги"
+      title="Последни шеги"
       content={
         <RequestStates
           loading={loading}
@@ -29,15 +30,11 @@ export default function LatestJokes({ limit }) {
       }
       actions={
         <Box flexGrow={1} display="flex" justifyContent="center">
-          <Button
-            variant="outlined"
-            color="primary"
-            startIcon={<ListIcon />}
-            component={Link}
-            to="/jokes"
-          >
-            Още смях
-          </Button>
+         <PinkButton
+         text={'Още смях'}
+         component={Link}
+         to="/jokes"
+         />
         </Box>
       }
     />
