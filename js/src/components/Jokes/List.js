@@ -19,7 +19,6 @@ export default function Page({ jokes, dividers = false }) {
                 <Typography
                   key={index}
                   variant="body2"
-                  color="textSecondary"
                   gutterBottom
                 >
                   {line}

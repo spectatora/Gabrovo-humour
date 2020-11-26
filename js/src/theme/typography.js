@@ -8,7 +8,7 @@ export default {
     position: 'relative',
     color: palette.text.primary,
     fontWeight: 700,
-    fontSize: '69px',
+    fontSize: '78px',
     lineHeight: '1.2',
     letterSpacing: '-3px',
   },
@@ -35,8 +35,9 @@ export default {
   h5: {
     color: palette.text.primary,
     fontWeight: 500,
-    fontSize: '16px',
+    fontSize: '24px',
     lineHeight: '1.2',
+    textAlign: 'right',
   },
   h6: {
     position: 'relative',
@@ -79,7 +80,7 @@ export default {
   },
   body2: {
     color: palette.subtitle.default,
-    fontSize: '14px',
+    fontSize: '22px',
     fontWeight: '300',
     letterSpacing: '0.1px',
     lineHeight: '1.43',

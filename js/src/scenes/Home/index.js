@@ -9,8 +9,6 @@ import Box from '@material-ui/core/Box';
 // Application imports
 import LatestJokes from './components/LatestJokes';
 import RandomJoke from './components/RandomJoke';
-// Asserts
-import cat_image from './assets/cat.jpg';
 
 const styles = (theme) => ({
   wrapper: {
@@ -28,20 +26,11 @@ const styles = (theme) => ({
       paddingLeft: '20px',
     },
   },
-  icon: {
-    '& svg': {
-      width: '42px',
-      height: '42px',
-    },
-  },
-  paddingLeft: {
-    paddingLeft: '20px',
-    [theme.breakpoints.down('sm')]: {
-      paddingLeft: '0',
-    },
-  },
   pageTitle: {
     marginBottom: '20px',
+    [theme.breakpoints.up('md')]: {
+      width: '120%',
+    },
   },
 });
 
