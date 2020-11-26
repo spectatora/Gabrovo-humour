@@ -9,7 +9,6 @@ import Box from '@material-ui/core/Box';
 import { useJokes } from '../../../data/api';
 import JokesList from '../../../components/Jokes/List';
 import RequestStates from '../../../components/RequestState';
-import {Link} from "react-router-dom";
 import PinkButton from "../../Home/components/PinkButton";
 
 function Page({ page, isLast, setPages }) {

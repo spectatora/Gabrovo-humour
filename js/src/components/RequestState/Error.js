@@ -6,12 +6,22 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import {makeStyles} from '@material-ui/core/styles';
+
+
+const useStyles = makeStyles({
+  icon: {
+    color: '#ffffff',
+  }
+});
 
 export default function Error({ onRetry }) {
+  const classes = useStyles();
+
   return (
     <Grid container spacing={2} direction="column" alignItems="center">
       <Grid item>
-        <ErrorOutlineIcon fontSize="large" />
+        <ErrorOutlineIcon className={classes.icon} fontSize="large" />
       </Grid>
       <Grid item>
         <Typography variant="h5" align="center">
