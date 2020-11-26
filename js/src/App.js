@@ -13,12 +13,14 @@ import {ThemeProvider} from '@material-ui/styles';
 import Layout from './components/Layout';
 import Home from './scenes/Home';
 import Jokes from './scenes/Jokes';
+import ScrollIntoView from './scenes/Home/components/ScrollIntoView';
 
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Layout>
+          <ScrollIntoView/>
           <Switch>
             <Route exact path="/">
               <Home/>

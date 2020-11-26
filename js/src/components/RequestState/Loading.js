@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 export default function Loading() {
   return (
     <Box display="flex" justifyContent="center" pt={2}>
-      <CircularProgress />
+      <CircularProgress color="white" />
     </Box>
   );
 }
