@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     marginTop: '-1px',
     marginBottom: '-1px',
     '& .MuiListItem-root': {
-      textAlign: 'right',
+      paddingLeft: '100px',
     },
   },
   header: {
